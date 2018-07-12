@@ -14,32 +14,35 @@ def enterExperiments():
     good=[]
     bad = []
     for f in files:
-        # try:
-        print('{}'.format(f))
-        expt = f.split('/')[5]
-        dmp = plateLayout()
-        dmp.name = expt
-        dmp.save()
-        if not experiment.objects.filter(name = expt):
-            x = experiment()
-            x.name = expt
-            x.date = timezone.datetime(int(expt[:2]), int(expt[2:4]), int(expt[4:6]))
-            x.plateLayout = dmp
-            x.save()
-        else:
-            x = experiment.objects.get(name = expt)
-        conditions = pd.read_csv('/media/steven/Ca_Backup/mosquito/{}/conditions.csv'.format(expt))
-        readkey(dmp, conditions)
-        m = movieFile()
-        m.experiment = x
-        m.exposure = guess_exposure(f)
-        m.replicate = guess_replicate(f)
-        m.filename = f
-        m.save()
+        try:
+            print('{}'.format(f))
+            expt = f.split('/')[5]
+            if not plateLayout.objects.filter(name=expt):
+                dmp = plateLayout()
+                dmp.name = expt
+                dmp.save()
+            else:
+                dmp = plateLayout.objects.get(name = expt)
+            if not experiment.objects.filter(name = expt):
+                x = experiment()
+                x.name = expt
+                x.date = timezone.datetime(int(expt[:2]), int(expt[2:4]), int(expt[4:6]))
+                x.plateLayout = dmp
+                x.save()
+            else:
+                x = experiment.objects.get(name = expt)
+            conditions = pd.read_csv('/media/steven/Ca_Backup/mosquito/{}/conditions.csv'.format(expt))
+            readkey(dmp, conditions)
+            m = movieFile()
+            m.experiment = x
+            m.exposure = guess_exposure(f)
+            m.replicate = guess_replicate(f)
+            m.filename = f
+            m.save()
 
-        good.append(dmp.name)
-        # except:
-        #     bad.append(dmp.name)
+            good.append(dmp.name)
+        except:
+            bad.append(dmp.name)
     return {'good': good,
         'bad': bad}
 
