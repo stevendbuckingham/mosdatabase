@@ -1,0 +1,6 @@
+{
+  "mosdb/tests/test_models.py": true,
+  "mosdb/tests/test_models.py::TestCase": true,
+  "mosdb/tests/test_models.py::testPlateKey": true,
+  "mosdb/tests/test_models.py::testPlateLayout": true
+}
