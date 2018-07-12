@@ -1,21 +1,20 @@
 from django.db import models
 
 # Create your models here.
-class plateLayout(models.Model):
-    '''
-    this is a list of standard layouts, referred to
-    by plateKey.  By giving this name, we can get teh key from plateKey
-    '''
-    name = models.CharField(max_length = 100)
+# class plateLayout(models.Model):
+#     '''
+#     this is a list of standard layouts, referred to
+#     by plateKey.  By giving this name, we can get teh key from plateKey
+#     '''
+#     name = models.CharField(max_length = 100)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class plateKey(models.Model):
     '''
     this will be a large table which will expand plateLayout
     '''
-    layout = models.ForeignKey('plateLayout', models.CASCADE, null = True)
     rowchoices = (
         ('A','A'),
         ('B','B'),
@@ -55,7 +54,7 @@ class genotype(models.Model):
 class experiment(models.Model):
     name = models.CharField(max_length = 100)
     date = models.DateField()
-    plateLayout = models.ForeignKey('plateLayout', models.CASCADE, null = True)
+    #plateLayout = models.ForeignKey('plateLayout', models.CASCADE, null = True)
 
     def __str__(self):
         return self.name
@@ -65,12 +64,13 @@ class movieFile(models.Model):
     exposure = models.PositiveIntegerField()
     replicate = models.PositiveIntegerField()
     filename = models.CharField(max_length=500)
+    platekey = models.ManyToManyField('plateKey')
 
     def __str__(self):
         return self.filename
 
 class measurement(models.Model):
-    movie_file = models.ForeignKey('movieFile', models.CASCADE, null = True)
+    platekeyvalue = models.ForeignKey('plateKey', models.CASCADE, null = True)
     measurementMethod = models.ForeignKey('measurementMethod', models.CASCADE, null=True)
     readout = models.FloatField()
 

@@ -139,3 +139,8 @@ class testMeasurement(TestCase):
     
     def test_measurement(self, meas):
         self.assertIsNotNone(meas)
+        self.assertTrue(type(meas.measurementMethod.script)==str)
+        self.assertTrue(meas.readout>=0)
+        self.assertTrue(np.isfinite(meas.readout))
+        self.assertTrue(str == type(meas.movie_file.experiment.name))
+        self.assertEqual(meas.movie_file.experiment.name, str(meas.movie_file.experiment))

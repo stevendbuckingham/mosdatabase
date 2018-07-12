@@ -1,0 +1,8 @@
+{
+    "python.venvPath": "/home/steven/mosdatabase/bin/python",
+    "python.pythonPath": "/home/steven/mosdatabase/bin/python",
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.pyTestArgs": [
+        "--ignore=lib"
+    ]
+}
