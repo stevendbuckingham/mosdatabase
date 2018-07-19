@@ -1,0 +1,12 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="Data added" %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<p>{{message}}</p>
+</div>
+
+{% endblock %}

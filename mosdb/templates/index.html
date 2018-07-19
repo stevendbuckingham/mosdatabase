@@ -1,0 +1,21 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="Mosquito database" %}
+{% endblock %}
+
+{% block content %}
+<div class="col">
+  <h1>This is the portal to the mosquito movement index database</h1>
+</div>
+<div class="col">
+  <div class="col">
+    <div class="btn-group" role="group">
+    <a href="/mosdb/addCompound/" role="button" class="btn btn-primary">Add a compound</a>
+    <a href="/mosdb/addExperiment/" role="button" class="btn btn-primary">Add an experiment</a>
+    <a href="/mosdb/addMovie/" role="button" class="btn btn-primary">Analyze a movie</a>
+    <a href="/mosdb/experiments/" role="button" class="btn btn-primary">View Experiments</a>
+  </div>
+  </div>
+</div>
+{% endblock %}

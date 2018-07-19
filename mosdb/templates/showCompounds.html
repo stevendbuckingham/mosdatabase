@@ -1,0 +1,23 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="Compound list" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <table class="table">
+    <tr>
+      <th>Compound</th>
+      <th></th>
+    </tr>
+    {% for compound in compounds %}
+    <tr>
+      <td>{{compound}}</td>
+      <td><a href="/mosdb/compounds/removeCompound/{{compound.id}}/" role="button" class="btn btn-primary">Remove</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% endblock %}

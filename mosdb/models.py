@@ -15,21 +15,12 @@ class plateKey(models.Model):
     '''
     this will be a large table which will expand plateLayout
     '''
-    rowchoices = (
-        ('A','A'),
-        ('B','B'),
-        ('C','C'),
-        ('D','D'),
-        ('E','E'),
-        ('F','F'),
-        ('G','G'),
-        ('H','H'),
-    )
-    row = models.CharField(max_length = 1, choices= rowchoices)
+    row = models.CharField(max_length = 1)
     column = models.PositiveIntegerField()
     compound = models.ForeignKey('compound', models.CASCADE, null = True)
     genotype = models.ForeignKey('genotype', models.CASCADE, null = True)
     concentration = models.FloatField(null=True)
+    experiment = models.ForeignKey('experiment', models.CASCADE)
 
 class compound(models.Model):
     name = models.CharField(max_length=100)
@@ -64,7 +55,6 @@ class movieFile(models.Model):
     exposure = models.PositiveIntegerField()
     replicate = models.PositiveIntegerField()
     filename = models.CharField(max_length=500)
-    platekey = models.ManyToManyField('plateKey')
 
     def __str__(self):
         return self.filename

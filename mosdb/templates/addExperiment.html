@@ -1,0 +1,11 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="add compound" %}
+{% endblock %}
+
+{% block content %}
+
+{% include "processForm.html" with submitTarget="/mosdb/addExperiment/"%}
+
+{% endblock %}

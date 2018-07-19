@@ -1,0 +1,17 @@
+{% load static %}
+<div class = "jumbotron">
+  {% if student != None %}
+  <h1>{{student.user.first_name}} {{student.user.last_name}}'s {{PanelKind}}</h1>
+  {% else %}
+    <h1>
+      <div class="row">
+      <div class="col-sm-2">
+        <img src="{% static 'mosquito.jpg' %}" width="100px" style='background-color: transparent'>
+      </div>
+      <div class="col">
+        {{PanelKind|title}}
+      </div>
+    </div>
+      </h1>
+  {% endif %}
+</div>

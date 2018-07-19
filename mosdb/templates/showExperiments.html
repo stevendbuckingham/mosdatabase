@@ -1,0 +1,25 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="Compound list" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <table class="table">
+    <tr>
+      <th>Experiment</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+    {% for experiment in experiments %}
+    <tr>
+      <td>{{experiment.name}}</td>
+      <td>{{experiment.date}}</td>
+      <td><a href="/mosdb/experiments/removeExperiment/{{experiment.id}}/" role="button" class="btn btn-primary">Remove</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% endblock %}
