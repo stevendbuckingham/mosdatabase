@@ -11,4 +11,5 @@ urlpatterns = [
     path('addMovie/', views.addMovie, name='addMovie'),
     path('experiments/', views.showExperiments, name='showExperiments'),
     path('experiments/removeExperiment/<experimentID>/', views.removeExperiment, name='removeExperiment'),
+    path('addMeasurementMethod/', views.addMeasurementMethod, name='addMeasurementMethod'),
 ]

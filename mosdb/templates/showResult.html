@@ -1,0 +1,9 @@
+{% extends "mosdb_root.html" %}
+
+{% block jumbo %}
+{% include "jumbotron.html" with PanelKind="Analysis result" %}
+{% endblock %}
+
+{% block content %}
+{{result|safe}}
+{% endblock %}

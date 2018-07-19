@@ -41,7 +41,7 @@ class addCompound(forms.Form):
     compound_name = forms.CharField(max_length = 300, min_length = 1)
 
 class addMovie(forms.Form):
-    from mosdb.models import experiment
+    from mosdb.models import experiment, measurementMethod
     label = 'Add a movie to analyse'
     label2 = 'You must attach this to an experiment'
     movie = forms.CharField(max_length = 500, min_length = 1)
@@ -49,4 +49,20 @@ class addMovie(forms.Form):
     replicate = forms.IntegerField(min_value = 1,required=False)
     experiment = forms.ModelChoiceField(
         queryset = experiment.objects.all(),
+    )
+    analysis_method = forms.ModelChoiceField(
+        queryset = measurementMethod.objects.all(),
+    )
+
+class addMeasurementMethod(forms.Form):
+    from mosdb.models import measurementMethod
+    name = forms.CharField(max_length=100)
+    label = 'Add the entire script, complete with parameters'
+    script = forms.CharField(
+        widget = forms.Textarea(
+            attrs ={
+                'cols':80,
+                'rows': 20,
+            }
+        )
     )

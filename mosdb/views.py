@@ -108,12 +108,28 @@ def addExperiment(request):
 
 def addMovie(request):
     from mosdb.forms import addMovie
+    from mosdb.helpers import analysis as anl
 
     if request.method == 'POST':
         form = addMovie(request.POST)
         if form.is_valid():
-            movieLocation = form.cleaned_data['movie']
-            
+            # movielocation is a folder containing probably 5 movies for averaging
+            movie = form.cleaned_data['movie']
+            #process movies and save
+            result = anl.processFile(movie, anl.movingPixels)
+            result = result.pivot(columns='col', index='row')
+            #pdb.set_trace()
+            context = {
+                'result': result.to_html(),
+            }
+            return render(request, 'showResult.html', context)
+
+    form = addMovie()
+    context = {
+        'form': form,
+    }
+    return render(request, 'addMovie.html', context)
+
 
     # get a movie filepath
 
@@ -138,3 +154,34 @@ def removeExperiment(request, experimentID):
     }
 
     return render(request, 'showExperiments.html', context)
+
+def addMeasurementMethod(request):
+    from mosdb.forms import addMeasurementMethod
+    from mosdb.models import measurementMethod
+
+    if request.method == 'POST':
+        form = addMeasurementMethod(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            script = form.cleaned_data['script']
+
+            if not measurementMethod.objects.filter(name=name):
+                measurementMethod.objects.create(
+                    name = name,
+                    script = script,
+                )
+                context = {
+                    'message': 'method {} added'.format(name),
+                }
+                return render(request, 'messages.html', context)
+            else:
+                context = {
+                    'message':'A method with the name {} already exists'.format(name),
+                }
+                return render(request, 'messages.html', context)
+
+    form = addMeasurementMethod()
+    context = {
+        'form': form,
+    }
+    return render(request, 'addMeasurementMethod.html', context)

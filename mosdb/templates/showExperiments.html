@@ -1,7 +1,7 @@
 {% extends "mosdb_root.html" %}
 
 {% block jumbo %}
-{% include "jumbotron.html" with PanelKind="Compound list" %}
+{% include "jumbotron.html" with PanelKind="Experiment list" %}
 {% endblock %}
 
 {% block content %}
@@ -21,5 +21,9 @@
     </tr>
     {% endfor %}
   </table>
+</div>
+<div class="row">
+  <a href="/mosdb/addExperiment/" role="button" class="btn btn-primary">Add experiment</a>
+</div>
 
   {% endblock %}
